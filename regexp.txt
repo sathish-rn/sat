@@ -1,3 +1,59 @@
+Creatures = "Birds, Animals"
+
+!!(Creatures =~ /\ABirds/)      # => true
+Creatures.start_with?("Birds")  # => true
+
+!!(Creatures =~ /Animals\z/)    # => true
+Creatures.end_with?("Animals")  # => true
+
+!!(Creatures =~ /Reptiles/)     # => false
+Creatures.include?("Reptiles")  # => false
+
+!!(Creatures =~ /\A\z/)  # => false
+Creatures.empty?         # => false
+
+!!(Creatures =~ /\ABirds, Animals\z/)  # => true
+Creatures == "Birds, Animals"          # => true
+
+!!(Creatures =~ /\A(?:Birds, Animals|Birds, Reptiles)\z/)  # => true
+["Birds, Animals", "Birds, Reptiles"].include?(Creatures)  # => true
+
+Creatures =~ /\A\w+/ && $&  # => "Birds"
+Creatures[/\A\w+/]          # => "Birds"
+
+Creatures =~ /\A(\w+),\s*(\w+)\z/ && $2  # => "Animals"
+Creatures[/\A(\w+),\s*(\w+)\z/, 2]       # => "Animals"
+
+Creatures =~ /\A(?<last>\w+),\s*(?<first>\w+)\z/ && $~[:first]  # => "Animals"
+Creatures[/\A(?<last>\w+),\s*(?<first>\w+)\z/, :first]          # => "Animals"
+
+Creatures.scan(/^.*\n?/)  # => ["Birds, Animals"]
+Creatures.lines           # => ["Birds, Animals"]
+
+Creatures.scan(/./m)  # => ["G", "r", "a", "y", ",", " ", "J", "a", "m", "e", "s"]
+Creatures.chars       # => ["G", "r", "a", "y", ",", " ", "J", "a", "m", "e", "s"]
+
+Creatures.gsub(/[aeiou]/, "")  # => "Brds, Anmls"
+Creatures.delete("aeiou")      # => "Brds, Anmls"
+
+Creatures.gsub(/[aeiou]/, "X") # => "BXrds, AnXmXls"
+Creatures.tr("aeiou", "X")     # => "BXrds, AnXmXls"
+
+# For the destructive operations that follow you can drop the `dup()` and
+# switch `sub()` to `sub!()`, as long as you don't care about the return value.
+
+Creatures.sub(/(?=,)/, " II")                 # => "Birds II, Animals"
+Creatures.dup.insert(Creatures.index(","), " II")  # => "Birds II, Animals"
+
+Creatures.sub(/\A/, "Creatures:  ")    # => "Creatures:  Birds, Animals"
+Creatures.dup.prepend("Creatures:  ")  # => "Creatures:  Birds, Animals"
+
+Creatures.sub(/\A.*\z/m, "Birds, Reptiles")  # => "Birds, Reptiles"
+Creatures.dup.replace("Birds, Reptiles")     # => "Birds, Reptiles"
+
+Creatures.sub(/\A.*\z/m, "")  # => ""
+Creatures.dup.clear           # => ""
+
 space_string ="\tsome    more space  here \t sd\r\n"
 
 space_string.sub(/\A\s+/, "")
@@ -17,6 +73,4 @@ space_string.chop
 
 space_string.gsub(/ +/, " ")
 space_string.squeeze(" ")
-
-
 
