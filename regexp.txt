@@ -1,0 +1,22 @@
+space_string ="\tsome    more space  here \t sd\r\n"
+
+space_string.sub(/\A\s+/, "")
+space_string.lstrip
+
+space_string.sub(/\s+\z/, "")
+space_string.rstrip
+
+space_string.sub(/\A\s*(.+?)\s*\z/m, '\1')
+space_string.strip
+
+space_string.sub(/(?:\r?\n|\r)\z/m, "")
+space_string.chomp
+
+space_string.sub(/(?:\r\n|.)\z/m, "")
+space_string.chop
+
+space_string.gsub(/ +/, " ")
+space_string.squeeze(" ")
+
+
+
