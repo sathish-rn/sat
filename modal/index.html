@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Modal Example</title>
+	<link rel="stylesheet" href="style.css" />
+	<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+	<script src="modal.js"></script>
+</head>
+<body>
+	<div class="container">
+	<button class="btn modal-btn" type="button" name="modal" data-target="mymodal">Open modal</button>
+		<div class="modal" id="mymodal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2>My Header part
+					<a href="#" class="close">&times;</a></h2>
+				</div>
+				<div class="modal-body">
+					<p>This is body content</p>
+				</div>
+				<div class="modal-footer">
+					<p>Here my footer content</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
